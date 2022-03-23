@@ -1,13 +1,15 @@
 "use-strict"
 
 const getAnimes = async () => {
-    try {
-        let response = await fetch("http://localhost:5000/api/animes");
-        response = await response.json();
-        return response;
-    } catch (err) {
-        return err;
+    let response = await fetch("http://localhost:5000/api/animes");
+
+    if (!response.ok) {
+        const message = `Connexion à l'API impossible : ${response.status}`;
+        throw new Error(message);
     }
+
+    return await response.json();
+
 }
 
 const getSongs = async () => {
@@ -15,7 +17,7 @@ const getSongs = async () => {
         let response = await fetch("http://localhost:5000/api/songs");
         response = await response.json();
         return response;
-    } catch (err) {
+    } catch (err) { 
         return err;
     }
 }
