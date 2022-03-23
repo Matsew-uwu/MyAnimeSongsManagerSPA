@@ -5,13 +5,15 @@ class Anime{
     /**
      * Constructeur de l'Anime
      *
+     * @param {int} id l'id
      * @param {string} name le nom de l'Anime
      * @param {string} text la description de l'Anime
      * @param {string} img l'image de l'Anime (un url ou le nom du fichier)
      * @param {string} uri l'uri de l'anime
      * 
      */
-    constructor(name, text, img, uri){
+    constructor(id, name, text, img, uri){
+        this.id = id;
         this.name = name;
         this.text = text;
         this.img = img;
@@ -26,6 +28,7 @@ class Song{
     /**
      * Constructeur de la chanson
      *
+     * @param {int} id l'id
      * @param {string} name le nom de la chanson
      * @param {string} relation type de la chanson (opening, ending etc)
      * @param {string} interpreter l'auteur
@@ -36,7 +39,8 @@ class Song{
      * 
      */
 
-    constructor(name, relation, interpreter, ytb_url, spoty_url, anime, uri){
+    constructor(id, name, relation, interpreter, ytb_url, spoty_url, anime, uri){
+        this.id = id;
         this.name = name;
         this.relation = relation;
         this.interpreter = interpreter;
