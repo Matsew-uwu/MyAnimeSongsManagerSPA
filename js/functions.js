@@ -23,6 +23,15 @@ const createTable = async () => {
         tdImg.append(anime.img);
         ligne.appendChild(tdImg);
 
+        let tdButton = document.createElement("td");
+        let btnEdit = document.createElement("button");
+        btnEdit.append("editer");
+        let btnSuppr = document.createElement("button");
+        btnSuppr.append("supprimer");
+        tdButton.appendChild(btnEdit);
+        tdButton.appendChild(btnSuppr);
+        ligne.appendChild(tdButton);
+
         table.appendChild(ligne);
     }
 }
