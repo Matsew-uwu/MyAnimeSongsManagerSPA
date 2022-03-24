@@ -9,7 +9,6 @@ const getAnimes = async () => {
     }
 
     return await response.json();
-
 }
 
 const getSongs = async () => {
@@ -20,6 +19,16 @@ const getSongs = async () => {
     } catch (err) { 
         return err;
     }
+}
+
+const getAnime = async (id) => {
+    return fetch(`http://localhost:5000/api/anime/${id}`)
+    .then((response) => {
+        return response.json();
+    })
+    .then((response) => {
+        return response;
+    });
 }
 
 (async () => {
