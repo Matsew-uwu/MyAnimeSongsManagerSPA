@@ -22,8 +22,23 @@
 
         let cellImg = row.insertCell(3);
         cellImg.append(anime.img);
+
+        // Insertion des bouton d'édition - (EN COURS)
+        let cellBtn = row.insertCell(4);
+        let btnEdit = document.createElement('button');
+        btnEdit.append('Éditer');
+        btnEdit.type = "button";
+        btnEdit.setAttribute('data-bs-toggle', "modal");
+        btnEdit.setAttribute('data-bs-target', "#myModal");
+        let btnSuppr = document.createElement('button');
+        btnSuppr.append('Supprimer');
+        btnSuppr.disabled = true;
+
+        
+        cellBtn.append(btnEdit, btnSuppr);
     }
 }
+
 
 (async () => {
     console.log('Lancement scipt : Functions');
