@@ -1,9 +1,10 @@
 /**
  * Récupère les animes et les ajoutes dans la table correspondante
  */
- const createTable = async () => {
+ const refreshTable = async () => {
     const animes = await getAnimes();
     let table = document.getElementById("table");
+    table.innerHTML = "";
 
     for (const a of animes){
         let anime = new Anime(a.id, a.name, a.text, a.img, uri="");
@@ -17,12 +18,17 @@
 
         let cellName = row.insertCell(1);
         cellName.append(anime.name);
+        cellName.classList.add("text-truncate");
+        cellName.style.maxWidth = "";
 
         let cellText = row.insertCell(2);
         cellText.append(anime.text);
+        cellText.style.maxWidth = "400px";
 
         let cellImg = row.insertCell(3);
         cellImg.append(anime.img);
+        cellImg.classList.add("text-truncate");
+        cellImg.style.maxWidth = "250px";
 
         // Insertion des bouton d'édition - (EN COURS)
         let cellBtn = row.insertCell(4);
@@ -42,6 +48,7 @@
         
         cellBtn.append(btnEdit, btnSuppr);
     }
+    console.log('table refresh');
 }
 
 /**
@@ -52,11 +59,20 @@ const fillAnimeEditModal = async (self) => {
 
     document.getElementById("anime-id").innerHTML = anime.id;
     document.querySelector("#animeEditionModal #name").value = anime.name;
-    document.querySelector("#animeEditionModal #text").innerHTML = anime.text;
-
+    document.querySelector("#animeEditionModal #text").value = anime.text;
 }
+
+
+/**
+ * Fonction chargée de notifier l'utilisateur de la validation de son action
+ */
+const onValid = () => {
+    
+    
+}
+
 
 (async () => {
     console.log('Lancement scipt : Functions');
-    createTable();
+    refreshTable();
 })()
