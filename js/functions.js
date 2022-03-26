@@ -1,39 +1,62 @@
-const createTable = async () => {
+/**
+ * Récupère les animes et les ajoutes dans la table correspondante
+ */
+ const createTable = async () => {
     const animes = await getAnimes();
-    let table = document.getElementById("tablesAnimes");
-    for (let i = 0; i < animes.length; i++) {
-        let anime = new Anime(animes[i].id, animes[i].name, animes[i].text, animes[i].img, uri="");
+    let table = document.getElementById("table");
 
-        let ligne = document.createElement("tr");
-        ligne.id = "anime-"+anime.name;
+    for (const a of animes){
+        let anime = new Anime(a.id, a.name, a.text, a.img, uri="");
 
-        let th = document.createElement("th");
-        th.append(anime.id);
-        ligne.appendChild(th);
+        let row = table.insertRow(0);
+        row.id = "anime-"+anime.name;
 
-        let tdTitre = document.createElement("td");
-        tdTitre.append(anime.name);
-        ligne.appendChild(tdTitre);
+        let cellId = row.insertCell(0);
+        cellId.append(anime.id);
+        cellId.disabled = true;
 
-        let tdDesc = document.createElement("td");
-        tdDesc.append(anime.text);
-        ligne.appendChild(tdDesc);
+        let cellName = row.insertCell(1);
+        cellName.append(anime.name);
 
-        let tdImg = document.createElement("td");
-        tdImg.append(anime.img);
-        ligne.appendChild(tdImg);
+        let cellText = row.insertCell(2);
+        cellText.append(anime.text);
 
-        let tdButton = document.createElement("td");
-        let btnEdit = document.createElement("button");
-        btnEdit.append("editer");
-        let btnSuppr = document.createElement("button");
-        btnSuppr.append("supprimer");
-        tdButton.appendChild(btnEdit);
-        tdButton.appendChild(btnSuppr);
-        ligne.appendChild(tdButton);
+        let cellImg = row.insertCell(3);
+        cellImg.append(anime.img);
 
-        table.appendChild(ligne);
+        // Insertion des bouton d'édition - (EN COURS)
+        let cellBtn = row.insertCell(4);
+        let btnEdit = document.createElement('button');
+        btnEdit.append('Éditer');
+        btnEdit.type = "button";
+        btnEdit.id = anime.id;
+        btnEdit.setAttribute('data-bs-toggle', "modal");
+        btnEdit.setAttribute('data-bs-target', "#animeEditionModal");
+        btnEdit.onclick = function(){
+            fillAnimeEditModal(this);
+        };
+        let btnSuppr = document.createElement('button');
+        btnSuppr.append('Supprimer');
+        btnSuppr.disabled = true;
+
+        
+        cellBtn.append(btnEdit, btnSuppr);
     }
 }
 
-createTable();
+/**
+ * Fonction chargée de préremplir le formulaire d'édition
+ */
+const fillAnimeEditModal = async (self) => {
+    let anime = await getAnime(self.id);
+
+    document.getElementById("anime-id").innerHTML = anime.id;
+    document.querySelector("#animeEditionModal #name").value = anime.name;
+    document.querySelector("#animeEditionModal #text").innerHTML = anime.text;
+
+}
+
+(async () => {
+    console.log('Lancement scipt : Functions');
+    createTable();
+})()
