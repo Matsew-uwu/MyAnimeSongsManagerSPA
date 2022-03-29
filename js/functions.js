@@ -35,9 +35,15 @@
         btnEdit.onclick = function(){
             fillAnimeEditModal(this);
         };
+        // Insertion du bouton de suppression
         let btnSuppr = document.createElement('button');
         btnSuppr.append('Supprimer');
-        btnSuppr.disabled = true;
+        btnSuppr.id = anime.id;
+        btnSuppr.setAttribute('data-bs-toggle', "modal");
+        btnSuppr.setAttribute('data-bs-target', "#animeSupprimerModal");
+        btnSuppr.onclick = function(){
+            fillAnimeDeleteModal(this);
+        };
 
         
         cellBtn.append(btnEdit, btnSuppr);
@@ -53,6 +59,16 @@ const fillAnimeEditModal = async (self) => {
     document.getElementById("anime-id").innerHTML = anime.id;
     document.querySelector("#animeEditionModal #name").value = anime.name;
     document.querySelector("#animeEditionModal #text").innerHTML = anime.text;
+}
+
+/**
+ * Fonction chargée de préremplir le popup de suppression
+ */
+ const fillAnimeDeleteModal = async (self) => {
+    let anime = await getAnime(self.id);
+
+    document.getElementById("anime-name2").innerHTML = anime.name;
+    document.getElementById("anime-id2").innerHTML = self.id;
 
 }
 

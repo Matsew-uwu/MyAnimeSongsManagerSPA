@@ -69,6 +69,33 @@ const SendEditedAnime = async () => {
     await putAnime(anime);
 }
 
+/**
+ * DELETE un anime
+ * @param {int} id 
+ */
+ const deleteAnime = async (id) => {
+    const uri = `http://localhost:5000/api/anime/${id}`;
+    fetch(uri, {
+    method: 'DELETE'
+    })
+    .then(res => {
+        return res.json();
+    })
+    .then(res => {
+        console.log(`DELETE : ${res}`);
+        // Print result as string
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
+
+const SendDeleteAnime = async () => {
+    // Récupère les information du formulaire
+    let id = document.getElementById("anime-id2").innerText;
+    await deleteAnime(id);
+}
+
 (async () => {
     console.log('Lancement scipt : Connexion');
     console.log(await getAnimes());
