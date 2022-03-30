@@ -102,7 +102,7 @@ function CreateButtonsDelEditAnime(anime) {
 //Crée ou recharge le tableau au lancement du site
 (async () => {
     console.log('Lancement scipt : Functions');
-    refreshTable();
+    refreshTable("anime");
 })()
 
 
