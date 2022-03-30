@@ -9,7 +9,7 @@
     for (const a of animes){
         let anime = new Anime(a.id, a.name, a.text, a.img, uri="");
 
-        let row = table.insertRow(0);
+        let row = table.insertRow(-1);
         row.id = "anime-"+anime.name;
 
         let cellId = row.insertCell(0);
