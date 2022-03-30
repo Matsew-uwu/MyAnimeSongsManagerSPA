@@ -59,7 +59,7 @@ const fillAnimeEditModal = async (self) => {
 
     document.getElementById("anime-id").innerHTML = anime.id;
     document.querySelector("#animeEditionModal #name").value = anime.name;
-    document.querySelector("#animeEditionModal #text").innerHTML = anime.text;
+    document.querySelector("#animeEditionModal #text").value = anime.text;
     document.querySelector("#animeEditionModal #anime-img").setAttribute("src", anime.img);
     console.log(anime.img)
 }
