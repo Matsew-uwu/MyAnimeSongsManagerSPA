@@ -51,22 +51,56 @@ const putAnime = async (anime) => {
     .then(res => {
         console.log(`PUT : ${res}`);
         // Print result as string
+        refreshTable();
     })
     .catch(err => {
         console.log(err);
     })
 }
 
+const postAnime = (anime) => {
+    const uri = `http://localhost:5000/api/anime/`;
+    fetch(uri, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(anime)
+        })
+        .then(res => {
+            return res.json();
+        })
+        .then(res => {
+            console.log(`PUT : ${res}`);
+            // Print result as string
+            refreshTable();
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
 const SendEditedAnime = async () => {
     // Récupère les information du formulaire
     let id = document.getElementById("anime-id").innerText;
-    let name = document.getElementById("name").value;
-    let text = document.getElementById("text").value;
+    let name = document.getElementById("anime-name").value;
+    let text = document.getElementById("anime-text").value;
     let img = "";
     let uri = "";
 
     let anime = new Anime(id, name, text, img, uri);
     await putAnime(anime);
+}
+
+const addAnime = async () => {
+    // Récupère les information du formulaire
+    let name = document.getElementById("anime-name").value;
+    let text = document.getElementById("anime-text").value;
+    let img = "";
+    let uri = "";
+
+    let anime = new Anime(id, name, text, img, uri);
+    await postAnime(anime);
 }
 
 (async () => {

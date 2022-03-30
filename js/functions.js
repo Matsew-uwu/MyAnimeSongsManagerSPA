@@ -58,8 +58,8 @@ const fillAnimeEditModal = async (self) => {
     let anime = await getAnime(self.id);
 
     document.getElementById("anime-id").innerHTML = anime.id;
-    document.querySelector("#animeEditionModal #name").value = anime.name;
-    document.querySelector("#animeEditionModal #text").value = anime.text;
+    document.querySelector("#animeEditionModal #anime-name").value = anime.name;
+    document.querySelector("#animeEditionModal #anime-text").value = anime.text;
 }
 
 
