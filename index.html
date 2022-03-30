@@ -42,19 +42,24 @@
 
     <!-- Modal popup éditer-->
     <div class="modal fade" id="animeEditionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Édition d'anime</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <p for="id">ID : <span id="anime-id"></span></p>
-                        <label for="name">Nom :</label>
-                        <input type="text" class="form-control" id="name" placeholder="">
-                        <label for="text">Description</label>
-                        <textarea class="form-control" id="text" rows="3"></textarea>
+                    <div class="container d-flex justify-content-around">
+                        <div class="form-group">
+                            <p for="id">ID : <span id="anime-id"></span></p>
+                            <label for="name">Nom :</label>
+                            <input type="text" class="form-control" id="name" placeholder="">
+                            <label for="text">Description</label>
+                            <textarea class="form-control" id="text" rows="3"></textarea>
+                        </div>
+                        <div class="container-img">
+                            <img id="anime-img" src="" alt="Anime cover" style="width: 220px;">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
