@@ -34,19 +34,18 @@ class Song{
      * @param {string} interpreter l'auteur
      * @param {string} ytb_url le lien youtube (embed)
      * @param {string} spoty_url le lien spotify (embed)
-     * @param {Anime} anime l'anime auquel correspond la chanson
+     * @param {int} anime_id l'anime auquel correspond la chanson
      * @param {string} uri l'uri de la chanson
      * 
      */
-
-    constructor(id, name, relation, interpreter, ytb_url, spoty_url, anime, uri){
+    constructor(id, name, relation, interpreter, ytb_url, spoty_url, anime_id, uri){
         this.id = id;
         this.name = name;
         this.relation = relation;
         this.interpreter = interpreter;
         this.ytb_url = ytb_url;
         this.spoty_url = spoty_url;
-        this.anime = anime //de class Anime
+        this.anime_id = anime_id //de class Anime
         this.uri = uri;
     }
 }
