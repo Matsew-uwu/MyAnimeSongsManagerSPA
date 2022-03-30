@@ -75,7 +75,7 @@ const SendEditedAnime = async () => {
     let id = document.getElementById("anime-id").innerText;
     let name = document.getElementById("name").value;
     let text = document.getElementById("text").value;
-    let img = "";
+    let img = document.getElementById("anime-img-url").value;
     let uri = "";
 
     let anime = new Anime(id, name, text, img, uri);
