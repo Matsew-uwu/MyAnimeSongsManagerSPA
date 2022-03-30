@@ -61,7 +61,8 @@ const fillAnimeEditModal = async (self) => {
     document.querySelector("#animeEditionModal #name").value = anime.name;
     document.querySelector("#animeEditionModal #text").value = anime.text;
     document.querySelector("#animeEditionModal #anime-img").setAttribute("src", anime.img);
-    console.log(anime.img)
+    document.querySelector("#animeEditionModal #anime-img-url").value = anime.img;
+    
 }
 
 /**
