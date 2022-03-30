@@ -1,3 +1,7 @@
+/**
+ * Récupère tous les animes (GET)
+ * @returns {Promise<Anime>} Les animes (promesse json)
+ */
 const getAnimes = async () => {
     let response = await fetch("http://localhost:5000/api/animes");
 
@@ -9,6 +13,10 @@ const getAnimes = async () => {
     return await response.json();
 }
 
+/**
+ * Récupère toutes les chansons (GET)
+ * @returns {Promise<Song>} Les chansons (promesse json)
+ */
 const getSongs = async () => {
     try {
         let response = await fetch("http://localhost:5000/api/songs");
@@ -19,6 +27,11 @@ const getSongs = async () => {
     }
 }
 
+/**
+ * Récupère un anime (GET)
+ * @param {int} id l'id de l'anime à récuperer
+ * @returns {Promise<Anime>} promesse avec l'anime qui correspond a l'id
+ */
 const getAnime = async (id) => {
     return fetch(`http://localhost:5000/api/anime/${id}`)
     .then((response) => {
