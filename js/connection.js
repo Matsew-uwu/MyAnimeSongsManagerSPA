@@ -50,7 +50,7 @@ const putAnime = async (anime) => {
     })
     .then(res => {
         console.log(`PUT : ${res}`);
-        // Print result as string
+        refreshTable();
     })
     .catch(err => {
         console.log(err);
@@ -83,7 +83,7 @@ const SendEditedAnime = async () => {
     })
     .then(res => {
         console.log(`DELETE : ${res}`);
-        // Print result as string
+        refreshTable();
     })
     .catch(err => {
         console.log(err);
@@ -114,7 +114,7 @@ const SendDeleteAnime = async () => {
     })
     .then(res => {
         console.log(`POST : ${res}`);
-        // Print result as string
+        refreshTable();
     })
     .catch(err => {
         console.log(err);

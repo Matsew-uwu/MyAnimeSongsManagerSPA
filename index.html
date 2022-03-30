@@ -11,30 +11,31 @@
     <header class="container-fluid text-center py-3 border">
         <h1>MyAnimeSongs - Manager</h1>
     </header>
-    <div class="container d-flex flex-column mt-3">
-        <div class="text-center">
-            <button class="btn btn-primary active" type="submit">Animes</button>
-            <button class="btn btn-primary" type="submit">Songs</button>
+    <div class="d-flex align-items-center">
+        <div class="container d-flex flex-column mt-3">
+            <div class="text-center">
+                <button class="btn btn-primary active" type="submit">Animes</button>
+                <button class="btn btn-primary" type="submit">Songs</button>
+            </div>
+            <div>
+                <table class="table table-hover table-striped align-middle w-auto">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Desciption</th>
+                        <th scope="col">Ref. Image</th>
+                        <th scope="col">
+                            <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#animeAjoutModal">Ajouter</button>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id = "table">
+                    </tbody>
+                </table>
+            </div>   
         </div>
-        <div>
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Titre</th>
-                    <th scope="col">Desciption</th>
-                    <th scope="col">Ref. Image</th>
-                    <th scope="col">
-                        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#animeAjoutModal">Ajouter</button>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody id = "table">
-                </tbody>
-              </table>
-        </div>   
     </div>
-
     <!-- Formulaire modal -->
 
     <!-- Button trigger modal -->
@@ -58,7 +59,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button id="btn-valid" type="button" class="btn btn-primary" onclick="SendEditedAnime()">Modifier</button>
+                    <button id="btn-valid" type="button" class="btn btn-primary" onclick="SendEditedAnime()" data-bs-dismiss="modal">Modifier</button>
                 </div>
             </div>
         </div>
@@ -79,7 +80,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button id="btn-valid" type="button" class="btn btn-primary" onclick="SendDeleteAnime()">Supprimer</button>
+                    <button id="btn-valid" type="button" class="btn btn-danger" onclick="SendDeleteAnime()" data-bs-dismiss="modal">Supprimer</button>
                 </div>
             </div>
         </div>
@@ -107,7 +108,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button id="btn-valid" type="button" class="btn btn-primary" onclick="SendCreatedAnime()">Ajouter</button>
+                    <button id="btn-valid" type="button" class="btn btn-primary" onclick="SendCreatedAnime()" data-bs-dismiss="modal">Ajouter</button>
                 </div>
             </div>
         </div>

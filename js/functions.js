@@ -1,9 +1,10 @@
 /**
  * Récupère les animes et les ajoutes dans la table correspondante
  */
- const createTable = async () => {
+ const refreshTable = async () => {
     const animes = await getAnimes();
     let table = document.getElementById("table");
+    table.innerHTML = "";
 
     for (const a of animes){
         let anime = new Anime(a.id, a.name, a.text, a.img, uri="");
@@ -74,5 +75,6 @@ const fillAnimeEditModal = async (self) => {
 
 (async () => {
     console.log('Lancement scipt : Functions');
-    createTable();
+    refreshTable();
 })()
+
