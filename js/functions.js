@@ -18,17 +18,12 @@
 
         let cellName = row.insertCell(1);
         cellName.append(anime.name);
-        cellName.classList.add("text-truncate");
-        cellName.style.maxWidth = "";
 
         let cellText = row.insertCell(2);
         cellText.append(anime.text);
-        cellText.style.maxWidth = "400px";
 
         let cellImg = row.insertCell(3);
         cellImg.append(anime.img);
-        cellImg.classList.add("text-truncate");
-        cellImg.style.maxWidth = "250px";
 
         // Insertion des bouton d'édition - (EN COURS)
         let cellBtn = row.insertCell(4);
@@ -41,14 +36,19 @@
         btnEdit.onclick = function(){
             fillAnimeEditModal(this);
         };
+        // Insertion du bouton de suppression
         let btnSuppr = document.createElement('button');
         btnSuppr.append('Supprimer');
-        btnSuppr.disabled = true;
+        btnSuppr.id = anime.id;
+        btnSuppr.setAttribute('data-bs-toggle', "modal");
+        btnSuppr.setAttribute('data-bs-target', "#animeSupprimerModal");
+        btnSuppr.onclick = function(){
+            fillAnimeDeleteModal(this);
+        };
 
         
         cellBtn.append(btnEdit, btnSuppr);
     }
-    console.log('table refresh');
 }
 
 /**
@@ -58,21 +58,23 @@ const fillAnimeEditModal = async (self) => {
     let anime = await getAnime(self.id);
 
     document.getElementById("anime-id").innerHTML = anime.id;
-    document.querySelector("#animeEditionModal #anime-name").value = anime.name;
-    document.querySelector("#animeEditionModal #anime-text").value = anime.text;
+    document.querySelector("#animeEditionModal #name").value = anime.name;
+    document.querySelector("#animeEditionModal #text").innerHTML = anime.text;
 }
-
 
 /**
- * Fonction chargée de notifier l'utilisateur de la validation de son action
+ * Fonction chargée de préremplir le popup de suppression
  */
-const onValid = () => {
-    
-    
-}
+ const fillAnimeDeleteModal = async (self) => {
+    let anime = await getAnime(self.id);
 
+    document.getElementById("anime-name2").innerHTML = anime.name;
+    document.getElementById("anime-id2").innerHTML = self.id;
+
+}
 
 (async () => {
     console.log('Lancement scipt : Functions');
     refreshTable();
 })()
+

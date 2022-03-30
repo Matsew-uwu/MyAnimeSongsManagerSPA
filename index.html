@@ -17,28 +17,30 @@
                 <button class="btn btn-primary active" type="submit">Animes</button>
                 <button class="btn btn-primary" type="submit">Songs</button>
             </div>
-            <div class="table-responsive">
+            <div>
                 <table class="table table-hover table-striped align-middle w-auto">
                     <thead>
-                      <tr>
+                    <tr>
                         <th scope="col">#</th>
                         <th scope="col">Titre</th>
                         <th scope="col">Desciption</th>
                         <th scope="col">Ref. Image</th>
-                      </tr>
+                        <th scope="col">
+                            <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#animeAjoutModal">Ajouter</button>
+                        </th>
+                    </tr>
                     </thead>
                     <tbody id = "table">
                     </tbody>
                 </table>
-            </div>  
-        </div> 
+            </div>   
+        </div>
     </div>
-
     <!-- Formulaire modal -->
 
     <!-- Button trigger modal -->
 
-    <!-- Modal -->
+    <!-- Modal popup éditer-->
     <div class="modal fade" id="animeEditionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -49,10 +51,10 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <p for="id">ID : <span id="anime-id"></span></p>
-                        <label for="anime-name">Nom :</label>
-                        <input type="text" class="form-control" id="anime-name" placeholder="">
-                        <label for="anime-text">Description</label>
-                        <textarea class="form-control" id="anime-text" rows="6"></textarea>
+                        <label for="name">Nom :</label>
+                        <input type="text" class="form-control" id="name" placeholder="">
+                        <label for="text">Description</label>
+                        <textarea class="form-control" id="text" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -62,6 +64,56 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal popup supprimer-->
+    <div class="modal fade" id="animeSupprimerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Suppression d'anime</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p for="id">Êtes-vous sûr de vouloir de supprimer l'anime <span id="anime-name2"></span> (ID : <span id="anime-id2"></span> )</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button id="btn-valid" type="button" class="btn btn-danger" onclick="SendDeleteAnime()" data-bs-dismiss="modal">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal popup ajouter-->
+    <div class="modal fade" id="animeAjoutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ajout d'un anime</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Nom :</label>
+                        <input type="text" class="form-control" id="post-name" placeholder="">
+                        <label for="name">URL de l'image :</label>
+                        <input type="text" class="form-control" id="post-image" placeholder="">
+                        <label for="text">Description</label>
+                        <textarea class="form-control" id="post-text" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button id="btn-valid" type="button" class="btn btn-primary" onclick="SendCreatedAnime()" data-bs-dismiss="modal">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="./js/classes.js" defer></script>
     <script src="./js/connection.js" defer></script>
