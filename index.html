@@ -14,13 +14,13 @@
     <div class="d-flex align-items-center">
         <div class="container d-flex flex-column mt-3">
             <div class="text-center">
-                <button class="btn btn-primary active" type="submit">Animes</button>
-                <button class="btn btn-primary" type="submit">Songs</button>
+                <button class="btn btn-primary active" onclick="refreshTable()">Animes</button>
+                <button class="btn btn-primary" onclick="refreshTableSongs()">Songs</button>
             </div>
             <div>
                 <table class="table table-hover table-striped align-middle w-auto">
                     <thead>
-                    <tr>
+                    <tr id="table-header">
                         <th scope="col">#</th>
                         <th scope="col">Titre</th>
                         <th scope="col">Desciption</th>
@@ -120,9 +120,95 @@
         </div>
     </div>
 
+
+
+
+
+    <!-- Section chansons -->
+
+
+    <!-- Modal popup éditer chansons-->
+    <div class="modal fade" id="songEditionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Édition de chanson</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container d-flex justify-content-around">
+                        <div class="form-group flex-grow-1 me-4">
+                            <p for="id">ID : <span id="song-id"></span></p>
+                            <label for="name">Nom :</label>
+                            <input type="text" class="form-control" id="relation" placeholder="">
+                        </div>
+                        <div class="container-img">
+                            <img id="song-img" src="" alt="Song cover" style="width: 220px;">
+                            <input type="text" id="song-img-url" class="form-control" placeholder="Cover URL">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button id="btn-valid" type="button" class="btn btn-primary" onclick="SendEditedSong()" data-bs-dismiss="modal">Modifier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal popup supprimer chansons-->
+    <div class="modal fade" id="songSupprimerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Suppression de chanson</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p for="id">Êtes-vous sûr de vouloir de supprimer la chanson <span id="song-name2"></span> (ID : <span id="song-id2"></span> )</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button id="btn-valid" type="button" class="btn btn-danger" onclick="SendDeleteSong()" data-bs-dismiss="modal">Supprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal popup ajouter chansons-->
+    <div class="modal fade" id="songAjoutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ajout d'une chanson</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Nom :</label>
+                        <input type="text" class="form-control" id="song-post-name" placeholder="">
+                        <label for="name">URL de l'image :</label>
+                        <input type="text" class="form-control" id="song-post-image" placeholder="">
+                        <label for="text">Description</label>
+                        <textarea class="form-control" id="song-post-text" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button id="btn-valid" type="button" class="btn btn-primary" onclick="SendCreatedSong()" data-bs-dismiss="modal">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="./js/classes.js" defer></script>
     <script src="./js/connection.js" defer></script>
     <script src="./js/functions.js" defer></script>
+    <script src="./js/functionsSongs.js" defer></script>
 </body>
 </html>
