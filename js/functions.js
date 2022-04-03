@@ -5,6 +5,7 @@
     const animes = await getAnimes();
     let table = document.getElementById("table");
     table.innerHTML = "";
+    CreateTableHeader(["#", "Titre", "Description", "Ref. Image"]);
 
     for (const a of animes){
         let anime = new Anime(a.id, a.name, a.text, a.img, uri="");
@@ -28,7 +29,8 @@ const fillAnimeEditModal = async (self) => {
     document.getElementById("anime-id").innerHTML = anime.id;
     document.querySelector("#animeEditionModal #name").value = anime.name;
     document.querySelector("#animeEditionModal #text").value = anime.text;
-    document.querySelector("#animeEditionModal #anime-img").setAttribute("src", anime.img);
+    img = isValidUrl(anime.img) ? anime.img : `http://localhost:5000/api/image/${anime.img}`;
+    document.querySelector("#animeEditionModal #anime-img").setAttribute("src", img);
     document.querySelector("#animeEditionModal #anime-img-url").value = anime.img;
     
 }
@@ -50,7 +52,7 @@ const fillAnimeEditModal = async (self) => {
  * @param {Anime} anime l'anime
  * @returns {HTMLTableRowElement} la ligne à inserer dans le tableau
  */
-function CreateAnimeLine(table, anime) {
+const CreateAnimeLine = (table, anime) => {
     let row = table.insertRow(-1);
     row.id = "anime-" + anime.name;
 
@@ -74,7 +76,7 @@ function CreateAnimeLine(table, anime) {
  * @param {Anime} anime l'anime de la ligne dans le tableau
  * @returns { HTMLButtonElement} {btnEdit, btnSuppr} les deux boutons
  */
-function CreateButtonsDelEditAnime(anime) {
+const CreateButtonsDelEditAnime = (anime) => {
     // Insertion du bouton d'édition
     let btnEdit = document.createElement('button');
     btnEdit.append('Éditer');
@@ -97,6 +99,40 @@ function CreateButtonsDelEditAnime(anime) {
     return { btnEdit, btnSuppr };
 }
 
+/**
+ * Créer l'entête de la table
+ * @param {List} attributes liste des attributs de l'entête de la table
+ */
+const CreateTableHeader = (attributes) => {
+    let header = document.getElementById("table-header");
+    header.innerHTML = "";
+
+    let i;
+    let cell;
+    for (i = 0; i < attributes.length; i++) {
+        cell = header.insertCell(i);
+        cell.append(attributes[i]);
+    }
+    cell = header.insertCell(i);
+    // Création bouton d'ajout
+    let button = document.createElement("button");
+    button.classList.add('btn', "btn-primary");
+    button.setAttribute("data-bs-toggle", "modal");
+    button.setAttribute("data-bs-target", "#animeAjoutModal");
+    button.append('Ajouter');
+    cell.append(button)
+
+}
+
+/**
+ * Simple fonction pour vérifier la validité d'une url
+ * @param {String} url 
+ * @returns 
+ */
+const isValidUrl = url => {
+    const matchpattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
+    return matchpattern.test(url);
+}
 
 
 //Crée ou recharge le tableau au lancement du site
