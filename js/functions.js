@@ -134,6 +134,12 @@ const isValidUrl = url => {
     return matchpattern.test(url);
 }
 
+const refreshCover = (field) => {
+
+    isValidUrl(field.value) ? document.getElementById('anime-img').src = field.value  : document.getElementById('anime-img').src = `http://localhost:5000/api/image/${field.value}`;
+
+}
+
 
 //Crée ou recharge le tableau au lancement du site
 (async () => {
