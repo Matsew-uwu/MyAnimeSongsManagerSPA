@@ -134,10 +134,12 @@ const isValidUrl = url => {
     return matchpattern.test(url);
 }
 
+/**
+ * Actualise l'affiche de l'image de couverture
+ * @param {HTMLInputElement} field 
+ */
 const refreshCover = (field) => {
-
     isValidUrl(field.value) ? document.getElementById('anime-img').src = field.value  : document.getElementById('anime-img').src = `http://localhost:5000/api/image/${field.value}`;
-
 }
 
 
