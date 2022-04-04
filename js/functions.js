@@ -34,7 +34,7 @@ const fillAnimeEditModal = async (self) => {
     document.querySelector("#animeEditionModal #name").value = anime.name;
     document.querySelector("#animeEditionModal #text").value = anime.text;
     img = isValidUrl(anime.img) ? anime.img : `http://localhost:5000/api/image/${anime.img}`;
-    document.querySelector("#animeEditionModal #anime-img").setAttribute("src", img);
+    document.querySelector("#animeEditionModal #anime-img-add").setAttribute("src", img);
     document.querySelector("#animeEditionModal #anime-img-url").value = anime.img;
     
 }
@@ -145,8 +145,8 @@ const isValidUrl = url => {
  * Actualise l'affiche de l'image de couverture
  * @param {HTMLInputElement} field 
  */
-const refreshCover = (field) => {
-    isValidUrl(field.value) ? document.getElementById('anime-img').src = field.value  : document.getElementById('anime-img').src = `http://localhost:5000/api/image/${field.value}`;
+const refreshCover = (field, target) => {
+    isValidUrl(field.value) ? document.getElementById(target).src = field.value  : document.getElementById(target).src = `http://localhost:5000/api/image/${field.value}`;
 }
 
 
