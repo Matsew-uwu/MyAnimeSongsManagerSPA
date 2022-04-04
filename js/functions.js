@@ -15,8 +15,12 @@
 
         // Insertion des boutons
         let { btnEdit, btnSuppr } = CreateButtonsDelEditAnime(anime);
+        btnSuppr.classList.add("ms-2");
         let cellBtn = row.insertCell(4);
-        cellBtn.append(btnEdit, btnSuppr);
+        let div = document.createElement('div');
+        div.append(btnEdit, btnSuppr)
+        div.classList.add('d-flex');
+        cellBtn.append(div);
     }
 }
 
@@ -79,8 +83,9 @@ const CreateAnimeLine = (table, anime) => {
 const CreateButtonsDelEditAnime = (anime) => {
     // Insertion du bouton d'édition
     let btnEdit = document.createElement('button');
-    btnEdit.append('Éditer');
+    btnEdit.innerHTML = '<i class="fa fa-bars"></i>';
     btnEdit.type = "button";
+    btnEdit.classList.add("btn", "btn-secondary");
     btnEdit.id = anime.id;
     btnEdit.setAttribute('data-bs-toggle', "modal");
     btnEdit.setAttribute('data-bs-target', "#animeEditionModal");
@@ -89,7 +94,8 @@ const CreateButtonsDelEditAnime = (anime) => {
     };
     // Insertion du bouton de suppression
     let btnSuppr = document.createElement('button');
-    btnSuppr.append('Supprimer');
+    btnSuppr.innerHTML = '<i class="fa fa-trash"></i>';
+    btnSuppr.classList.add("btn", "btn-secondary");
     btnSuppr.id = anime.id;
     btnSuppr.setAttribute('data-bs-toggle', "modal");
     btnSuppr.setAttribute('data-bs-target', "#animeSupprimerModal");
@@ -119,8 +125,9 @@ const CreateTableHeader = (attributes) => {
     button.classList.add('btn', "btn-primary");
     button.setAttribute("data-bs-toggle", "modal");
     button.setAttribute("data-bs-target", "#animeAjoutModal");
-    button.append('Ajouter');
+    button.innerHTML = '<i class="fa fa-plus"></i>';
     cell.append(button)
+    cell.classList.add("text-center");
 
 }
 
