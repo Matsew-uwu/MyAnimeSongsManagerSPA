@@ -71,15 +71,25 @@ const putAnime = async (anime) => {
 }
 
 const SendEditedAnime = async () => {
+    // Trigger si le champs pour le titre est vide
+    if (isInputEmpty(document.getElementById("anime-put-name"))) {
+        document.getElementById('form-put-anime').classList.add('need-validation', 'was-validated');
+        return;
+    }
+
     // Récupère les information du formulaire
     let id = document.getElementById("anime-id").innerText;
-    let name = document.getElementById("name").value;
-    let text = document.getElementById("text").value;
-    let img = document.getElementById("anime-img-url").value;
+    let name = document.getElementById("anime-put-name").value;
+    let text = document.getElementById("anime-put-text").value;
+    let img = document.getElementById("anime-put-url").value;
     let uri = "";
 
+    // Envoie l'anime
     let anime = new Anime(id, name, text, img, uri);
     await putAnime(anime);
+
+    // Ferme le modal
+    AnimeEditionModal.hide()
 }
 
 /**
@@ -135,15 +145,26 @@ const SendDeleteAnime = async () => {
 }
 
 const SendCreatedAnime = async () => {
+    
+    // Trigger si le champs pour le titre est vide
+    if (isInputEmpty(document.getElementById("anime-post-name"))) {
+        document.getElementById('form-post-anime').classList.add('need-validation', 'was-validated');
+        return;
+    }
+
     // Récupère les information du formulaire
     let id = null; //id n'est pas utilisé par l'api
     let name = document.getElementById("anime-post-name").value;
     let text = document.getElementById("anime-post-text").value;
-    let img = document.getElementById("anime-post-image").value;
+    let img = document.getElementById("anime-post-url").value;
     let uri = "";
 
+    // Envoie l'anime
     let anime = new Anime(id, name, text, img, uri);
     await postAnime(anime);
+
+    // Ferme le modal
+    AnimeAjoutModal.hide();
 }
 
 (async () => {
