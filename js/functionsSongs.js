@@ -6,33 +6,7 @@
     console.log(songs);
     let table = document.getElementById("table");
     table.innerHTML = "";
-
-    //Refonte du header du tableau pour les chansons
-    let tableHeader = document.getElementById("table-header");
-    tableHeader.innerHTML = "";
-    let numero = document.createElement("th");
-    numero.setAttribute("scope", "col");
-    numero.append("#");
-
-    let titre = document.createElement("th");
-    titre.setAttribute("scope", "col");
-    titre.append("Titre");
-
-    let relation = document.createElement("th");
-    relation.setAttribute("scope", "col");
-    relation.append("Type");
-
-    let liens = document.createElement("th");
-    liens.setAttribute("scope", "col");
-    liens.append("Liens");
-
-    let thBtnAjouter = document.createElement("th");
-    thBtnAjouter.setAttribute("scope", "col");
-    let btnAjouter = document.createElement("button");
-    btnAjouter.classList.add("btn", "btn-primary");
-    btnAjouter.type="submit";
-    btnAjouter.setAttribute("data-bs-toggle", "modal")
-    btnAjouter.setAttribute("data-bs-target", "songAjoutModal");
+    CreateTableHeader(["#", "Titre", "Relation", "Interpreteur", "Liens", "anime"], "song");
     
 
     for (const s of songs){
