@@ -126,6 +126,11 @@ const CreateTableHeader = (attributes, type) => {
     button.classList.add('btn', "btn-primary");
     button.setAttribute("data-bs-toggle", "modal");
     button.setAttribute("data-bs-target", "#"+type+"AjoutModal");
+    if (type === "song") {
+        button.onclick = function () {
+            fillSongCreateModal(this);
+        };
+    }
     button.innerHTML = '<i class="fa fa-plus"></i>';
     cell.append(button)
     cell.classList.add("text-center");

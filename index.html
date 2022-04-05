@@ -144,12 +144,18 @@
                     <div class="container d-flex justify-content-around">
                         <div class="form-group flex-grow-1 me-4">
                             <p for="id">ID : <span id="song-id"></span></p>
-                            <label for="name">Nom :</label>
-                            <input type="text" class="form-control" id="relation" placeholder="" required>
-                        </div>
-                        <div class="container-img">
-                            <img id="song-img" src="" alt="Song cover" style="width: 220px;">
-                            <input type="text" id="song-img-url" class="form-control" placeholder="Cover URL">
+                            <label for="song-put-name">Titre :</label>
+                            <input type="text" class="form-control" id="song-put-name" placeholder="" required>
+                            <label for="song-put-relation">Relation :</label>
+                            <input type="text" class="form-control" id="song-put-relation" placeholder="" required>
+                            <label for="song-put-interpreter">Auteur :</label>
+                            <input type="text" class="form-control" id="song-put-interpreter" placeholder="" required>
+                            <label for="song-put-youtube">URL youtube :</label>
+                            <input type="text" class="form-control" id="song-put-youtube" placeholder="">
+                            <label for="song-put-spotify">URL spotify :</label>
+                            <input type="text" class="form-control" id="song-put-spotify" placeholder="">
+
+                            <select name="select-animes" id="song-put-animes">Choisissez l'anime</select>
                         </div>
                     </div>
                 </div>
@@ -196,12 +202,15 @@
                     <div class="form-group">
                         <label for="song-post-name">Titre :</label>
                         <input type="text" class="form-control" id="song-post-name" placeholder="" required>
+                        <label for="song-post-relation">Relation :</label>
+                        <input type="text" class="form-control" id="song-post-relation" placeholder="" required>
                         <label for="song-post-interpreter">Auteur :</label>
                         <input type="text" class="form-control" id="song-post-interpreter" placeholder="" required>
                         <label for="song-post-youtube">URL youtube :</label>
                         <input type="text" class="form-control" id="song-post-youtube" placeholder="">
                         <label for="song-post-spotify">URL spotify :</label>
                         <input type="text" class="form-control" id="song-post-spotify" placeholder="">
+
                         <select name="select-animes" id="song-post-animes">Choisissez l'anime</select>
                     </div>
                 </div>

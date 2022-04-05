@@ -25,8 +25,14 @@ const fillSongEditModal = async (self) => {
     let song = await getSong(self.id);
 
     document.getElementById("song-id").innerHTML = song.id;
-    document.querySelector("#songEditionModal #name").value = song.title;
-    document.querySelector("#songEditionModal #text").value = song.text;
+    document.getElementById("song-put-name").value = song.title;
+    document.getElementById("song-put-relation").value = song.relation;
+    document.getElementById("song-put-interpreter").value = song.interpreter;
+    document.getElementById("song-put-youtube").value = song.ytb_url;
+    document.getElementById("song-put-spotify").value = song.spoty_url;
+
+    await creerOptionsAnimes(song, "put");
+
     document.querySelector("#songEditionModal #song-img").setAttribute("src", song.img);
     document.querySelector("#songEditionModal #song-img-url").value = song.img;
     
@@ -37,10 +43,20 @@ const fillSongEditModal = async (self) => {
  */
  const fillSongDeleteModal = async (self) => {
     let song = await getSong(self.id);
-    console.log(song);
 
     document.getElementById("song-name2").innerHTML = song.title;
     document.getElementById("song-id2").innerHTML = self.id;
+    
+
+}
+
+/**
+ * Fonction chargée de préremplir le popup de l'ajout de la chanson
+ */
+ const fillSongCreateModal = async (self) => {
+    let song = null;
+
+    await creerOptionsAnimes(song, "post");
 
 }
 
@@ -101,6 +117,41 @@ function insererLiensLigne(song, cellLiens) {
     lienSpotify.append(song.spoty_url);
     cellLiens.appendChild(lienYoutube);
     cellLiens.appendChild(lienSpotify);
+}
+
+async function creerOptionsAnimes(song, type) {
+    let animes = await getAnimes();
+    let select = document.getElementById("song-"+ type +"-animes");
+    select.innerHTML=""; //clear le select si les options ont deja ete ajoutes avant
+
+    //s'il s'agit de la modification afficher l'anime de la chanson
+    if (type === "put") {
+        let anime_of_song = await getAnime(song.anime_id);
+        //ajout de l'option de l'anime courant
+        let optDefaut = document.createElement('option');
+        optDefaut.value = anime_of_song.id;
+        optDefaut.innerHTML = anime_of_song.name;
+        select.appendChild(optDefaut);
+        
+        for (const anime of animes) {
+            //pour ne pas ajouter en double
+            if (anime.name != anime_of_song.name){
+                let opt = document.createElement('option');
+                opt.value = anime.id;
+                opt.innerHTML = anime.name;
+                select.appendChild(opt);
+            }
+        }
+    }
+    else{
+        //creation des options des animes
+        for (const anime of animes) {
+            let opt = document.createElement('option');
+                opt.value = anime.id;
+                opt.innerHTML = anime.name;
+                select.appendChild(opt);
+        }
+    }
 }
 
 /**
