@@ -54,13 +54,13 @@
                         <div class="form-group flex-grow-1 me-4">
                             <p for="id">ID : <span id="anime-id"></span></p>
                             <label for="name">Nom :</label>
-                            <input type="text" class="form-control" id="name" placeholder="">
+                            <input type="text" class="form-control" id="name" placeholder="" required>
                             <label for="text">Description</label>
                             <textarea class="form-control" id="text" rows="6"></textarea>
                         </div>
                         <div class="container-img">
-                            <img id="anime-img" src="" alt="Anime cover" style="width: 220px;">
-                            <input type="text" id="anime-img-url" class="form-control" placeholder="Cover URL" onfocusout="refreshCover(this)">
+                            <img id="anime-img-edit" src="" alt="Anime cover" style="width: 220px;">
+                            <input type="text" id="anime-img-url" class="form-control" placeholder="Cover URL" onfocusout="refreshCover(this, 'anime-img-edit')">
                         </div>
                     </div>
                 </div>
@@ -97,20 +97,24 @@
 
     <!-- Modal popup ajouter-->
     <div class="modal fade" id="animeAjoutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Ajout d'un anime</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name">Nom :</label>
-                        <input type="text" class="form-control" id="post-name" placeholder="">
-                        <label for="name">URL de l'image :</label>
-                        <input type="text" class="form-control" id="post-image" placeholder="">
-                        <label for="text">Description</label>
-                        <textarea class="form-control" id="post-text" rows="6"></textarea>
+                    <div class="container d-flex justify-content-around">
+                        <div class="form-group flex-grow-1 me-4">
+                            <label for="name">Nom :</label>
+                            <input type="text" class="form-control" id="anime-post-name" placeholder="" required>
+                            <label for="name">URL de l'image :</label>
+                            <input type="text" class="form-control" id="anime-post-image" class="form-control" placeholder="Cover URL" onfocusout="refreshCover(this, 'anime-img-add')">
+                            <label for="text">Description</label>
+                            <textarea class="form-control" id="anime-post-text" rows="6"></textarea>
+                        </div>
+                        <div class="container-img">
+                            <img id="anime-img-add" src="" alt="" style="width: 220px;">                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -141,7 +145,7 @@
                         <div class="form-group flex-grow-1 me-4">
                             <p for="id">ID : <span id="song-id"></span></p>
                             <label for="name">Nom :</label>
-                            <input type="text" class="form-control" id="relation" placeholder="">
+                            <input type="text" class="form-control" id="relation" placeholder="" required>
                         </div>
                         <div class="container-img">
                             <img id="song-img" src="" alt="Song cover" style="width: 220px;">
@@ -191,7 +195,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Nom :</label>
-                        <input type="text" class="form-control" id="song-post-name" placeholder="">
+                        <input type="text" class="form-control" id="song-post-name" placeholder="" required>
                         <label for="name">URL de l'image :</label>
                         <input type="text" class="form-control" id="song-post-image" placeholder="">
                         <label for="text">Description</label>

@@ -137,9 +137,9 @@ const SendDeleteAnime = async () => {
 const SendCreatedAnime = async () => {
     // Récupère les information du formulaire
     let id = null; //id n'est pas utilisé par l'api
-    let name = document.getElementById("post-name").value;
-    let text = document.getElementById("post-text").value;
-    let img = document.getElementById("post-image").value;
+    let name = document.getElementById("anime-post-name").value;
+    let text = document.getElementById("anime-post-text").value;
+    let img = document.getElementById("anime-post-image").value;
     let uri = "";
 
     let anime = new Anime(id, name, text, img, uri);
