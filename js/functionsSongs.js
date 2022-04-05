@@ -1,9 +1,9 @@
 /**
  * Récupère les chansons et les ajoutes dans la table correspondante
  */
- const refreshTableSongs = async () => {
-    const songs = await getSongs();
-    console.log(songs);
+ const refreshTableSongs = async (limit = 15, page = 1, tag = "", argument = "", order = "") => {
+    const songs = await getSongs(15, 1, tag);
+    document.getElementById('table-content').setAttribute('type', "songs");
     let table = document.getElementById("table");
     table.innerHTML = "";
     CreateTableHeader(["#", "Titre", "Relation", "Interpreteur", "Liens", "Anime Cover"], "song");
@@ -37,7 +37,6 @@ const fillSongEditModal = async (self) => {
  */
  const fillSongDeleteModal = async (self) => {
     let song = await getSong(self.id);
-    console.log(song);
 
     document.getElementById("song-name2").innerHTML = song.title;
     document.getElementById("song-id2").innerHTML = self.id;
@@ -79,7 +78,7 @@ async function CreateSongLine(table, song) {
     else{
         image.src = `http://localhost:5000/api/image/${anime.img}`;
     }
-    image.style.width = "220px";
+    image.style.width = "150px";
     cellAnime.append(image);
 
     // Insertion des boutons
@@ -132,3 +131,7 @@ function insererLiensLigne(song, cellLiens) {
     };
     return { btnEdit, btnSuppr };
 }
+
+(async () => {
+    console.log('Lancement script : Fonctions Songs');
+})()

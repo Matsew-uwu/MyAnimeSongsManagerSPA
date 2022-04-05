@@ -1,9 +1,10 @@
 /**
  * Récupère tous les animes (GET)
- * @returns {Promise<Anime>} Les animes (promesse json)
+ * @returns {Promise<Anime>} Les animes (Promesse json)
  */
-const getAnimes = async () => {
-    let response = await fetch("http://localhost:5000/api/animes");
+const getAnimes = async (limit = 15, page = 1, tag = "", argument = "", order = "") => {
+    let uri = `http://localhost:5000/api/animes?limit=${limit}&page=${page}&tag=${tag}&argument=${argument}&order=${order}`;
+    let response = await fetch(uri);
 
     if (!response.ok) {
         const message = `Connexion à l'API impossible : ${response.status}`;
@@ -17,9 +18,10 @@ const getAnimes = async () => {
  * Récupère toutes les chansons (GET)
  * @returns {Promise<Song>} Les chansons (promesse json)
  */
-const getSongs = async () => {
+const getSongs = async (limit = 15, page = 1, tag = "", argument = "", order = "") => {
+    let uri = `http://localhost:5000/api/songs?limit=${limit}&page=${page}&tag=${tag}&argument=${argument}&order=${order}`;
     try {
-        let response = await fetch("http://localhost:5000/api/songs");
+        let response = await fetch(uri);
         response = await response.json();
         return response;
     } catch (err) { 
@@ -38,7 +40,7 @@ const getAnime = async (id) => {
         return response.json();
     })
     .catch((err) => {
-        console.log(res);
+        console.log(err);
     })
     .then((response) => {
         return response;
@@ -170,14 +172,6 @@ const SendCreatedAnime = async () => {
     AnimeAjoutModal.hide();
 }
 
-(async () => {
-    console.log('Lancement scipt : Connexion');
-    console.log(await getAnimes());
-})()
-
-
-
-
 //Chansons
 
 
@@ -192,7 +186,7 @@ const SendCreatedAnime = async () => {
         return response.json();
     })
     .catch((err) => {
-        console.log(res);
+        console.log(err);
     })
     .then((response) => {
         return response;
@@ -300,7 +294,7 @@ const SendDeleteSong = async () => {
     await postAnime(anime);
 }
 */
+
 (async () => {
-    console.log('Lancement scipt : Connexion');
-    console.log(await getAnimes());
+    console.log('Lancement script : Connexion');
 })()
