@@ -63,7 +63,7 @@ const putAnime = async (anime) => {
     })
     .then(res => {
         console.log(`PUT : ${res}`);
-        refreshTable();
+        refreshTableAnimes();
     })
     .catch(err => {
         console.log(err);
@@ -106,7 +106,7 @@ const SendEditedAnime = async () => {
     })
     .then(res => {
         console.log(`DELETE : ${res}`);
-        refreshTable();
+        refreshTableAnimes();
     })
     .catch(err => {
         console.log(err);
@@ -137,7 +137,7 @@ const SendDeleteAnime = async () => {
     })
     .then(res => {
         console.log(`POST : ${res}`);
-        refreshTable();
+        refreshTableAnimes();
     })
     .catch(err => {
         console.log(err);
@@ -163,6 +163,9 @@ const SendCreatedAnime = async () => {
     let anime = new Anime(id, name, text, img, uri);
     await postAnime(anime);
 
+    // Vide le formulaire
+    refreshFormAnime(this);
+    
     // Ferme le modal
     AnimeAjoutModal.hide();
 }
