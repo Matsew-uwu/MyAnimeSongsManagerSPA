@@ -10,7 +10,7 @@ let AnimeEditionModal = bootstrap.Modal.getOrCreateInstance(document.getElementB
     const animes = await getAnimes();
     let table = document.getElementById("table");
     table.innerHTML = "";
-    CreateTableHeader(["#", "Titre", "Description", "Ref. Image"]);
+    CreateTableHeader(["#", "Titre", "Description", "Ref. Image"], "anime");
 
     for (const a of animes){
         let anime = new Anime(a.id, a.name, a.text, a.img, uri="");
@@ -113,8 +113,9 @@ const CreateButtonsDelEditAnime = (anime) => {
 /**
  * Créer l'entête de la table
  * @param {List} attributes liste des attributs de l'entête de la table
+ * @param {String} type le type de l'entete ( doit etre "anime" ou "song" )
  */
-const CreateTableHeader = (attributes) => {
+const CreateTableHeader = (attributes, type) => {
     let header = document.getElementById("table-header");
     header.innerHTML = "";
 
@@ -129,7 +130,7 @@ const CreateTableHeader = (attributes) => {
     let button = document.createElement("button");
     button.classList.add('btn', "btn-primary");
     button.setAttribute("data-bs-toggle", "modal");
-    button.setAttribute("data-bs-target", "#animeAjoutModal");
+    button.setAttribute("data-bs-target", "#"+type+"AjoutModal");
     button.innerHTML = '<i class="fa fa-plus"></i>';
     cell.append(button)
     cell.classList.add("text-center");
