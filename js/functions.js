@@ -1,3 +1,8 @@
+// Récupération de modals pour manipulation
+let AnimeAjoutModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('animeAjoutModal'));
+let AnimeEditionModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('animeEditionModal'));
+
+
 /**
  * Récupère les animes et les ajoutes dans la table correspondante
  */
@@ -31,11 +36,11 @@ const fillAnimeEditModal = async (self) => {
     let anime = await getAnime(self.id);
 
     document.getElementById("anime-id").innerHTML = anime.id;
-    document.querySelector("#animeEditionModal #name").value = anime.name;
-    document.querySelector("#animeEditionModal #text").value = anime.text;
+    document.querySelector("#animeEditionModal #anime-put-name").value = anime.name;
+    document.querySelector("#animeEditionModal #anime-put-text").value = anime.text;
     img = isValidUrl(anime.img) ? anime.img : `http://localhost:5000/api/image/${anime.img}`;
-    document.querySelector("#animeEditionModal #anime-img-add").setAttribute("src", img);
-    document.querySelector("#animeEditionModal #anime-img-url").value = anime.img;
+    document.querySelector("#animeEditionModal #anime-put-img").setAttribute("src", img);
+    document.querySelector("#animeEditionModal #anime-put-url").value = anime.img;
     
 }
 
@@ -149,11 +154,17 @@ const refreshCover = (field, target) => {
     isValidUrl(field.value) ? document.getElementById(target).src = field.value  : document.getElementById(target).src = `http://localhost:5000/api/image/${field.value}`;
 }
 
+const isInputEmpty = (input) => {
+    return input.value.length == 0;
+}
 
 //Crée ou recharge le tableau au lancement du site
 (async () => {
     console.log('Lancement scipt : Functions');
     refreshTable("anime");
+
+    // On récupère les modals
+    
 })()
 
 
