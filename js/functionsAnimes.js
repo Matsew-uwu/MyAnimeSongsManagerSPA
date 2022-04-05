@@ -2,12 +2,25 @@
 let AnimeAjoutModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('animeAjoutModal'));
 let AnimeEditionModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('animeEditionModal'));
 
+// Empeche la validation de la barre de recherche
+let bar = document.getElementById("search-bar");
+bar.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        if (document.getElementById('table-content').getAttribute('type') == "animes"){
+            refreshTableAnimes(15, 1, bar.value);
+        } else if (document.getElementById('table-content').getAttribute('type') == "songs") {
+            refreshTableSongs(15, 1, bar.value);
+        }
+        event.preventDefault();
+    }
+});
 
 /**
  * Récupère les animes et les ajoutes dans la table correspondante
  */
- const refreshTableAnimes = async () => {
-    const animes = await getAnimes();
+ const refreshTableAnimes = async (limit = 15, page = 1, tag = "", argument = "", order = "") => {
+    const animes = await getAnimes(limit, page, tag, argument, order);
+    document.getElementById('table-content').setAttribute('type', "animes");
     let table = document.getElementById("table");
     table.innerHTML = "";
     CreateTableHeader(["#", "Titre", "Description", "Cover"], "anime");
@@ -175,13 +188,11 @@ const isInputEmpty = (input) => {
     return input.value.length == 0;
 }
 
+
 //Crée ou recharge le tableau au lancement du site
 (async () => {
-    console.log('Lancement scipt : Functions');
+    console.log('Lancement script : Fonctions Animes');
     refreshTableAnimes("anime");
-
-    // On récupère les modals
-    
 })()
 
 
