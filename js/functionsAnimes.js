@@ -6,11 +6,7 @@ let AnimeEditionModal = bootstrap.Modal.getOrCreateInstance(document.getElementB
 let bar = document.getElementById("search-bar");
 bar.addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
-        if (document.getElementById('table-content').getAttribute('type') == "animes"){
-            refreshTableAnimes(15, 1, bar.value);
-        } else if (document.getElementById('table-content').getAttribute('type') == "songs") {
-            refreshTableSongs(15, 1, bar.value);
-        }
+        refreshSearch();
         event.preventDefault();
     }
 });
@@ -188,6 +184,13 @@ const isInputEmpty = (input) => {
     return input.value.length == 0;
 }
 
+const refreshSearch = () => {
+    if (document.getElementById('table-content').getAttribute('type') == "animes"){
+        refreshTableAnimes(15, 1, bar.value);
+    } else if (document.getElementById('table-content').getAttribute('type') == "songs") {
+        refreshTableSongs(15, 1, bar.value);
+    }
+}
 
 //Crée ou recharge le tableau au lancement du site
 (async () => {
