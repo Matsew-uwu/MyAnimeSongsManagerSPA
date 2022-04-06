@@ -126,35 +126,6 @@
     </div>
 
     <!-- Section chansons -->
-
-    <!-- Modal - Ajout - chansons -->
-    <div class="modal fade" id="songAjoutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Ajout d'une chanson</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="song-post-name">Titre :</label>
-                        <input type="text" class="form-control" id="song-post-name" placeholder="" required>
-                        <label for="song-post-interpreter">Auteur :</label>
-                        <input type="text" class="form-control" id="song-post-interpreter" placeholder="" required>
-                        <label for="song-post-youtube">URL youtube :</label>
-                        <input type="text" class="form-control" id="song-post-youtube" placeholder="">
-                        <label for="song-post-spotify">URL spotify :</label>
-                        <input type="text" class="form-control" id="song-post-spotify" placeholder="">
-                        <select name="select-animes" id="song-post-animes">Choisissez l'anime</select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button id="btn-valid" type="button" class="btn btn-primary" onclick="SendCreatedSong()" data-bs-dismiss="modal">Ajouter</button>
-                </div>
-            </div>
-        </div>
-    </div>
     
     <!-- Modal - Edition - chansons -->
     <div class="modal fade" id="songEditionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -178,8 +149,6 @@
                             <input type="text" class="form-control" id="song-put-youtube" placeholder="">
                             <label for="song-put-spotify">URL spotify :</label>
                             <input type="text" class="form-control" id="song-put-spotify" placeholder="">
-
-                            <select name="select-animes" id="song-put-animes">Choisissez l'anime</select>
                         </div>
                     </div>
                 </div>
