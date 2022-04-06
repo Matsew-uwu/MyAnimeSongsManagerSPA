@@ -10,7 +10,13 @@ Veillez vous referer au ReadMe du projet avant de continuer.
 
 ## Lancement
 
-Une fois le server lancé, l'application est accessible en ouvrant le fichier index.html
+Une fois le server lancé et ce projet cloné, l'application est accessible en ouvrant le fichier index.html
+
+```
+git clone https://gitlab.com/Matsew/myanimesongsmanagerapi.git
+cd myanimesongsmanagerapi
+open ./index.html
+```
 
 ## CRÉDITS
 
