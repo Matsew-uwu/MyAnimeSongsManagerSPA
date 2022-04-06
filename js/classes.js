@@ -29,7 +29,7 @@ class Song{
      * Constructeur de la chanson
      *
      * @param {int} id l'id
-     * @param {string} name le nom de la chanson
+     * @param {string} title le nom de la chanson
      * @param {string} relation type de la chanson (opening, ending etc)
      * @param {string} interpreter l'auteur
      * @param {string} ytb_url le lien youtube (embed)
@@ -38,9 +38,9 @@ class Song{
      * @param {string} uri l'uri de la chanson
      * 
      */
-    constructor(id, name, relation, interpreter, ytb_url, spoty_url, anime_id, uri){
+    constructor(id, title, relation, interpreter, ytb_url, spoty_url, anime_id, uri){
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.relation = relation;
         this.interpreter = interpreter;
         this.ytb_url = ytb_url;
