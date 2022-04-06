@@ -1,8 +1,8 @@
 /**
  * Récupère les chansons et les ajoutes dans la table correspondante
  */
- const refreshTableSongs = async (limit = 15, page = 1, tag = "", argument = "", order = "") => {
-    const songs = await getSongs(15, 1, tag);
+ const refreshTableSongs = async (limit = 50, page = 1, tag = "", argument = "", order = "") => {
+    const songs = await getSongs(limit, page, tag);
     document.getElementById('table-content').setAttribute('type', "songs");
     let table = document.getElementById("table");
     table.innerHTML = "";
@@ -85,7 +85,7 @@ async function CreateSongLine(table, song) {
     else{
         image.src = `http://localhost:5000/api/image/${anime.img}`;
     }
-    image.style.width = "150px";
+    image.style.width = "50px";
     cellAnime.append(image);
 
     // Insertion des boutons
@@ -152,7 +152,6 @@ async function creerOptionsAnimes() {
     };
     return { btnEdit, btnSuppr };
 }
-
 
 
 (async () => {
