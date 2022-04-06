@@ -72,6 +72,9 @@ const putAnime = async (anime) => {
     })
 }
 
+/**
+ * Recupere les donnees du formulaire de l'edition d'un anime et cree la requete put
+ */
 const SendEditedAnime = async () => {
     // Trigger si le champs pour le titre est vide
     if (isInputEmpty(document.getElementById("anime-put-name"))) {
@@ -115,6 +118,9 @@ const SendEditedAnime = async () => {
     })
 }
 
+/**
+ * Recupere l'id de l'anime a supprimer et cree la requete delete
+ */
 const SendDeleteAnime = async () => {
     // Récupère les information du formulaire
     let id = document.getElementById("anime-id2").innerText;
@@ -146,6 +152,9 @@ const SendDeleteAnime = async () => {
     })
 }
 
+/**
+ * Recupere les donnees du formulaire de l'ajout d'un anime et cree la requete post
+ */
 const SendCreatedAnime = async () => {
     
     // Trigger si le champs pour le titre est vide
@@ -159,7 +168,7 @@ const SendCreatedAnime = async () => {
     let name = document.getElementById("anime-post-name").value;
     let text = document.getElementById("anime-post-text").value;
     let img = document.getElementById("anime-post-url").value;
-    let uri = "";
+    let uri = ""; //non utilise
 
     // Envoie l'anime
     let anime = new Anime(id, name, text, img, uri);
@@ -172,8 +181,8 @@ const SendCreatedAnime = async () => {
     AnimeAjoutModal.hide();
 }
 
-//Chansons
 
+//Chansons
 
 /**
  * Récupère une chanson (GET)
@@ -218,6 +227,9 @@ const putSong = async (song) => {
     })
 }
 
+/**
+ * Recupere les donnees du formulaire de l'edition d'une chanson et cree la requete put
+ */
 const SendEditedSong = async () => {
     // Récupère les information du formulaire
     let id = document.getElementById("song-id").innerText;
@@ -227,7 +239,7 @@ const SendEditedSong = async () => {
     let youtube = document.getElementById("song-put-youtube").value;
     let spotify = document.getElementById("song-put-spotify").value;
 
-    let song = new Song(id, titre, relation, interpreter, youtube, spotify, null, "");
+    let song = new Song(id, titre, relation, interpreter, youtube, spotify, null, ""); //il faut recuperer l'id de l'anime normalement mais visiblement ca ne gene pas
     await putSong(song);
 }
 
@@ -252,6 +264,9 @@ const SendEditedSong = async () => {
     })
 }
 
+/**
+ * Recupere l'id de la chanson a supprimer et cree la requete delete
+ */
 const SendDeleteSong = async () => {
     // Récupère les information du formulaire
     let id = document.getElementById("song-id2").innerText;
@@ -259,7 +274,7 @@ const SendDeleteSong = async () => {
 }
 
 /**
- * Crée une chanson en POST
+ * Crée une chanson en POST et envoie la requete
  * @param {Song} song 
  */
  const postSong = async (song) => {
@@ -283,16 +298,19 @@ const SendDeleteSong = async () => {
     })
 }
 
+/**
+ * Recupere les donnees du formulaire de l'ajout d'une chanson et cree la requete post
+ */
 const SendCreatedSong = async () => {
     // Récupère les information du formulaire
-    let id = null;
+    let id = null; //gere automatiquement
     let titre = document.getElementById("song-post-name").value;
     let relation = document.getElementById("song-post-relation").value;
     let interpreter = document.getElementById("song-post-interpreter").value;
     let youtube = document.getElementById("song-post-youtube").value;
     let spotify = document.getElementById("song-post-spotify").value;
     let anime_id = document.getElementById("song-post-animes").value;
-    let uri = "";
+    let uri = ""; //non utilise
     
     let song = new Song(id, titre, relation, interpreter, youtube, spotify, anime_id, uri);
     await postSong(song);

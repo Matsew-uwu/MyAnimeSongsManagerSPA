@@ -1,5 +1,10 @@
 /**
  * Récupère les chansons et les ajoutes dans la table correspondante
+ * @param {int} limit le nombre de chansons a afficher dans le tableau
+ * @param {int} page la page de chansons a afficher
+ * @param {String} tag le string de la recherche 
+ * @param {String} argument non implemente (pour le tri)
+ * @param {String} order non implemente (pour le tri)
  */
  const refreshTableSongs = async (limit = 50, page = 1, tag = "", argument = "", order = "") => {
     const songs = await getSongs(limit, page, tag);
@@ -57,31 +62,34 @@ const fillSongEditModal = async (self) => {
  * @returns {HTMLTableRowElement} la ligne à inserer dans le tableau
  */
 async function CreateSongLine(table, song) {
-    let row = table.insertRow(-1);
+    let row = table.insertRow(-1); //pour un ordre croissant
     row.id = "song-" + song.title;
 
-    let cellId = row.insertCell(0);
+    let cellId = row.insertCell(0); //cellule avec l'id de la chanson
     cellId.append(song.id);
     cellId.disabled = true;
 
-    let cellName = row.insertCell(1);
+    let cellName = row.insertCell(1); //cellule avec le titre de la chanson
     cellName.append(song.title);
 
-    let cellRelation = row.insertCell(2);
+    let cellRelation = row.insertCell(2); //cellule avec la relation de la chanson (opening, ending etc)
     cellRelation.append(song.relation);
 
-    let cellInterpreter = row.insertCell(3);
+    let cellInterpreter = row.insertCell(3); //cellule avec l'auteur de la chanson
     cellInterpreter.append(song.interpreter);
 
-    let cellLiens = row.insertCell(4);
+    let cellLiens = row.insertCell(4); //cellule avec les liens de la chanson (youtube, spotify)
     insererLiensLigne(song, cellLiens);
 
-    let cellAnime = row.insertCell(5);
+    //cellule avec l'image de l'anime correspondant a la chanson
+    let cellAnime = row.insertCell(5); 
     let anime = await getAnime(song.anime_id);
     let image = document.createElement("img");
+    //si c'est un url afficher l'image a partir de l'url
     if(isValidUrl(anime.img)){
         image.src = anime.img;
     }
+    //sinon recuperer l'image dans la bd
     else{
         image.src = `http://localhost:5000/api/image/${anime.img}`;
     }
@@ -100,6 +108,11 @@ async function CreateSongLine(table, song) {
     return row;
 }
 
+/**
+ * Insere les deux liens de la chansons dans la cellule avec les liens
+ * @param {Song} song la chanson de la ligne
+ * @param { HTMLTableCellElement } cellLiens la cellule dans laquelle il faut inserer les liens
+ */
 function insererLiensLigne(song, cellLiens) {
     let lienYoutube = document.createElement("p");
     lienYoutube.append("https://www.youtube.com/watch?v=" + song.ytb_url);
@@ -109,6 +122,9 @@ function insererLiensLigne(song, cellLiens) {
     cellLiens.appendChild(lienSpotify);
 }
 
+/**
+ * Crée les options dans le select du choix de l'anime dans le popup de l'ajout d'un anime
+ */
 async function creerOptionsAnimes() {
     let animes = await getAnimes(limit = 100); //recuperer tous les animes
     let select = document.getElementById("song-post-animes");

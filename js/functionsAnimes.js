@@ -13,6 +13,11 @@ bar.addEventListener("keypress", (event) => {
 
 /**
  * Récupère les animes et les ajoutes dans la table correspondante
+ * @param {int} limit le nombre d'animes a afficher dans le tableau
+ * @param {int} page la page d'animes a afficher
+ * @param {String} tag le string de la recherche 
+ * @param {String} argument non implemente (pour le tri), laisser vide
+ * @param {String} order non implemente (pour le tri), laisser vide
  */
  const refreshTableAnimes = async (limit = 15, page = 1, tag = "", argument = "", order = "") => {
     const animes = await getAnimes(limit, page, tag, argument, order);
@@ -66,6 +71,9 @@ const fillAnimeEditModal = async (self) => {
 
 }
 
+/**
+ * Vide le formulaire de l'ajout des animes s'il a deja ete rempli avant
+ */
 const refreshFormAnime = (self) => {
     document.getElementById("form-post-anime").classList.remove("need-validation", "was-validated");
     document.getElementById("anime-post-name").value = "";
@@ -97,6 +105,7 @@ const CreateAnimeLine = (table, anime) => {
     let cellImg = row.insertCell(3);
     let img = document.createElement("img");
     
+    //afficher le cover de l'anime a partir de l'url si c'est un url, recuperer l'image dans la bd sinon
     img.src = isValidUrl(anime.img) ? anime.img  : `http://localhost:5000/api/image/${anime.img}`;
 
     img.alt = anime.img
@@ -168,7 +177,7 @@ const CreateTableHeader = (attributes, type) => {
 }
 
 /**
- * Simple fonction pour vérifier la validité d'une url
+ * Fonction simple pour vérifier la validité d'une url
  * @param {String} url 
  * @returns 
  */
@@ -178,17 +187,26 @@ const isValidUrl = url => {
 }
 
 /**
- * Actualise l'affiche de l'image de couverture
- * @param {HTMLInputElement} field 
+ * Actualise l'affiche de l'image de couverture (en lisant l'url/nom du fichier dans field et l'affiche dans target)
+ * @param {HTMLInputElement} field
+ * @param {HTMLElement} target
  */
 const refreshCover = (field, target) => {
     isValidUrl(field.value) ? document.getElementById(target).src = field.value  : document.getElementById(target).src = `http://localhost:5000/api/image/${field.value}`;
 }
 
+/**
+ * Verifie si le champ imput est vide ou non
+ * @param {HTMLInputElement} input
+ * @returns {boolean}
+ */
 const isInputEmpty = (input) => {
     return input.value.length == 0;
 }
 
+/**
+ * Affiche les animes ou les chansons qui correspondent a la recherche
+ */
 const refreshSearch = () => {
     if (document.getElementById('table-content').getAttribute('type') == "animes"){
         refreshTableAnimes(15, 1, bar.value);
@@ -197,8 +215,11 @@ const refreshSearch = () => {
     }
 }
 
+/**
+ * Affiche les animes de la page choisi
+ * @param {int} page la page a afficher
+ */
 const getAnimesPage = (page) => {
-    console.log('animes')
     try{
         refreshTableAnimes(15, page, bar.value);
     } catch(e){
@@ -206,6 +227,10 @@ const getAnimesPage = (page) => {
     }
 }
 
+/**
+ * Affiche les chansons de la page choisi
+ * @param {int} page la page a afficher
+ */
 const getSongsPage = (page) => {
     console.log('songs')
     console.log(page)
@@ -216,6 +241,10 @@ const getSongsPage = (page) => {
     }
 }
 
+/**
+ * Gere la pagination
+ * @param {int} page la page a afficher
+ */
 const getPaginationPage = (page) => {
     if (document.getElementById('table-content').getAttribute('type') == "animes"){
         try{
