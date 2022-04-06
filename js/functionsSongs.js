@@ -110,7 +110,7 @@ function insererLiensLigne(song, cellLiens) {
 }
 
 async function creerOptionsAnimes() {
-    let animes = await getAnimes();
+    let animes = await getAnimes(limit = 100); //recuperer tous les animes
     let select = document.getElementById("song-post-animes");
     select.innerHTML=""; //clear le select si les options ont deja ete ajoutes avant
 
