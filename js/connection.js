@@ -1,9 +1,10 @@
 /**
  * Récupère tous les animes (GET)
- * @returns {Promise<Anime>} Les animes (promesse json)
+ * @returns {Promise<Anime>} Les animes (Promesse json)
  */
-const getAnimes = async () => {
-    let response = await fetch("http://localhost:5000/api/animes");
+const getAnimes = async (limit = 15, page = 1, tag = "", argument = "", order = "") => {
+    let uri = `http://localhost:5000/api/animes?limit=${limit}&page=${page}&tag=${tag}&argument=${argument}&order=${order}`;
+    let response = await fetch(uri);
 
     if (!response.ok) {
         const message = `Connexion à l'API impossible : ${response.status}`;
@@ -17,9 +18,10 @@ const getAnimes = async () => {
  * Récupère toutes les chansons (GET)
  * @returns {Promise<Song>} Les chansons (promesse json)
  */
-const getSongs = async () => {
+const getSongs = async (limit = 15, page = 1, tag = "", argument = "", order = "") => {
+    let uri = `http://localhost:5000/api/songs?limit=${limit}&page=${page}&tag=${tag}&argument=${argument}&order=${order}`;
     try {
-        let response = await fetch("http://localhost:5000/api/songs");
+        let response = await fetch(uri);
         response = await response.json();
         return response;
     } catch (err) { 
@@ -38,7 +40,7 @@ const getAnime = async (id) => {
         return response.json();
     })
     .catch((err) => {
-        console.log(res);
+        console.log(err);
     })
     .then((response) => {
         return response;
@@ -63,7 +65,7 @@ const putAnime = async (anime) => {
     })
     .then(res => {
         console.log(`PUT : ${res}`);
-        refreshTable();
+        refreshTableAnimes();
     })
     .catch(err => {
         console.log(err);
@@ -71,15 +73,25 @@ const putAnime = async (anime) => {
 }
 
 const SendEditedAnime = async () => {
+    // Trigger si le champs pour le titre est vide
+    if (isInputEmpty(document.getElementById("anime-put-name"))) {
+        document.getElementById('form-put-anime').classList.add('need-validation', 'was-validated');
+        return;
+    }
+
     // Récupère les information du formulaire
     let id = document.getElementById("anime-id").innerText;
-    let name = document.getElementById("name").value;
-    let text = document.getElementById("text").value;
-    let img = document.getElementById("anime-img-url").value;
+    let name = document.getElementById("anime-put-name").value;
+    let text = document.getElementById("anime-put-text").value;
+    let img = document.getElementById("anime-put-url").value;
     let uri = "";
 
+    // Envoie l'anime
     let anime = new Anime(id, name, text, img, uri);
     await putAnime(anime);
+
+    // Ferme le modal
+    AnimeEditionModal.hide()
 }
 
 /**
@@ -96,7 +108,7 @@ const SendEditedAnime = async () => {
     })
     .then(res => {
         console.log(`DELETE : ${res}`);
-        refreshTable();
+        refreshTableAnimes();
     })
     .catch(err => {
         console.log(err);
@@ -127,7 +139,7 @@ const SendDeleteAnime = async () => {
     })
     .then(res => {
         console.log(`POST : ${res}`);
-        refreshTable();
+        refreshTableAnimes();
     })
     .catch(err => {
         console.log(err);
@@ -135,24 +147,30 @@ const SendDeleteAnime = async () => {
 }
 
 const SendCreatedAnime = async () => {
+    
+    // Trigger si le champs pour le titre est vide
+    if (isInputEmpty(document.getElementById("anime-post-name"))) {
+        document.getElementById('form-post-anime').classList.add('need-validation', 'was-validated');
+        return;
+    }
+
     // Récupère les information du formulaire
     let id = null; //id n'est pas utilisé par l'api
     let name = document.getElementById("anime-post-name").value;
     let text = document.getElementById("anime-post-text").value;
-    let img = document.getElementById("anime-post-image").value;
+    let img = document.getElementById("anime-post-url").value;
     let uri = "";
 
+    // Envoie l'anime
     let anime = new Anime(id, name, text, img, uri);
     await postAnime(anime);
+
+    // Vide le formulaire
+    refreshFormAnime(this);
+    
+    // Ferme le modal
+    AnimeAjoutModal.hide();
 }
-
-(async () => {
-    console.log('Lancement scipt : Connexion');
-    console.log(await getAnimes());
-})()
-
-
-
 
 //Chansons
 
@@ -168,7 +186,7 @@ const SendCreatedAnime = async () => {
         return response.json();
     })
     .catch((err) => {
-        console.log(res);
+        console.log(err);
     })
     .then((response) => {
         return response;
@@ -283,6 +301,5 @@ const SendCreatedSong = async () => {
 }
 
 (async () => {
-    console.log('Lancement scipt : Connexion');
-    console.log(await getAnimes());
+    console.log('Lancement script : Connexion');
 })()

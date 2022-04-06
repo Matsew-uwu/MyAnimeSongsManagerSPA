@@ -1,11 +1,29 @@
+// Récupération de modals pour manipulation
+let AnimeAjoutModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('animeAjoutModal'));
+let AnimeEditionModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('animeEditionModal'));
+
+// Empeche la validation de la barre de recherche
+let bar = document.getElementById("search-bar");
+bar.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        if (document.getElementById('table-content').getAttribute('type') == "animes"){
+            refreshTableAnimes(15, 1, bar.value);
+        } else if (document.getElementById('table-content').getAttribute('type') == "songs") {
+            refreshTableSongs(15, 1, bar.value);
+        }
+        event.preventDefault();
+    }
+});
+
 /**
  * Récupère les animes et les ajoutes dans la table correspondante
  */
- const refreshTable = async () => {
-    const animes = await getAnimes();
+ const refreshTableAnimes = async (limit = 15, page = 1, tag = "", argument = "", order = "") => {
+    const animes = await getAnimes(limit, page, tag, argument, order);
+    document.getElementById('table-content').setAttribute('type', "animes");
     let table = document.getElementById("table");
     table.innerHTML = "";
-    CreateTableHeader(["#", "Titre", "Description", "Ref. Image"], "anime");
+    CreateTableHeader(["#", "Titre", "Description", "Cover"], "anime");
 
     for (const a of animes){
         let anime = new Anime(a.id, a.name, a.text, a.img, uri="");
@@ -30,12 +48,14 @@
 const fillAnimeEditModal = async (self) => {
     let anime = await getAnime(self.id);
 
+    let form = document.getElementById('form-put-anime');
+    form.classList.remove("need-validation", "was-validated");
     document.getElementById("anime-id").innerHTML = anime.id;
-    document.querySelector("#animeEditionModal #name").value = anime.name;
-    document.querySelector("#animeEditionModal #text").value = anime.text;
+    document.querySelector("#animeEditionModal #anime-put-name").value = anime.name;
+    document.querySelector("#animeEditionModal #anime-put-text").value = anime.text;
     img = isValidUrl(anime.img) ? anime.img : `http://localhost:5000/api/image/${anime.img}`;
-    document.querySelector("#animeEditionModal #anime-img-add").setAttribute("src", img);
-    document.querySelector("#animeEditionModal #anime-img-url").value = anime.img;
+    document.querySelector("#animeEditionModal #anime-put-img").setAttribute("src", img);
+    document.querySelector("#animeEditionModal #anime-put-url").value = anime.img;
     
 }
 
@@ -48,6 +68,14 @@ const fillAnimeEditModal = async (self) => {
     document.getElementById("anime-name2").innerHTML = anime.name;
     document.getElementById("anime-id2").innerHTML = self.id;
 
+}
+
+const refreshFormAnime = (self) => {
+    document.getElementById("form-post-anime").classList.remove("need-validation", "was-validated");
+    document.getElementById("anime-post-name").value = "";
+    document.getElementById("anime-post-url").value = "";
+    document.getElementById("anime-post-text").value = "";
+    document.getElementById("anime-post-img").src = "";
 }
 
 /**
@@ -71,7 +99,13 @@ const CreateAnimeLine = (table, anime) => {
     cellText.append(anime.text);
 
     let cellImg = row.insertCell(3);
-    cellImg.append(anime.img);
+    let img = document.createElement("img");
+    
+    img.src = isValidUrl(anime.img) ? anime.img  : `http://localhost:5000/api/image/${anime.img}`;
+
+    img.alt = anime.img
+    img.style.width = "150px";
+    cellImg.appendChild(img);
     return row;
 }
 
@@ -155,11 +189,15 @@ const refreshCover = (field, target) => {
     isValidUrl(field.value) ? document.getElementById(target).src = field.value  : document.getElementById(target).src = `http://localhost:5000/api/image/${field.value}`;
 }
 
+const isInputEmpty = (input) => {
+    return input.value.length == 0;
+}
+
 
 //Crée ou recharge le tableau au lancement du site
 (async () => {
-    console.log('Lancement scipt : Functions');
-    refreshTable("anime");
+    console.log('Lancement script : Fonctions Animes');
+    refreshTableAnimes("anime");
 })()
 
 
