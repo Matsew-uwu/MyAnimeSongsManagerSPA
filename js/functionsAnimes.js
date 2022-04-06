@@ -197,6 +197,26 @@ const refreshSearch = () => {
     }
 }
 
+const getAnimesPage = (page) => {
+    console.log('animes')
+    refreshTableAnimes(15, page, bar.value);
+}
+
+const getSongsPage = (page) => {
+    console.log('songs')
+    console.log(page)
+    refreshTableSongs(50, page, bar.value);
+}
+
+const getPaginationPage = (page) => {
+    if (document.getElementById('table-content').getAttribute('type') == "animes"){
+        getAnimesPage(page);
+    } else if (document.getElementById('table-content').getAttribute('type') == "songs") {
+        getSongsPage(page);
+    }
+}
+
+
 //Crée ou recharge le tableau au lancement du site
 (async () => {
     console.log('Lancement script : Fonctions Animes');
