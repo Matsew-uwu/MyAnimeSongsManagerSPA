@@ -29,13 +29,7 @@ const fillSongEditModal = async (self) => {
     document.getElementById("song-put-relation").value = song.relation;
     document.getElementById("song-put-interpreter").value = song.interpreter;
     document.getElementById("song-put-youtube").value = song.ytb_url;
-    document.getElementById("song-put-spotify").value = song.spoty_url;
-
-    await creerOptionsAnimes(song, "put");
-
-    document.querySelector("#songEditionModal #song-img").setAttribute("src", song.img);
-    document.querySelector("#songEditionModal #song-img-url").value = song.img;
-    
+    document.getElementById("song-put-spotify").value = song.spoty_url;    
 }
 
 /**
@@ -47,17 +41,13 @@ const fillSongEditModal = async (self) => {
     document.getElementById("song-name2").innerHTML = song.title;
     document.getElementById("song-id2").innerHTML = self.id;
     
-
 }
 
 /**
- * Fonction chargée de préremplir le popup de l'ajout de la chanson
+ * Fonction chargée de préremplir le popup de l'ajout de la chanson (les animes possibles)
  */
  const fillSongCreateModal = async (self) => {
-    let song = null;
-
-    await creerOptionsAnimes(song, "post");
-
+    await creerOptionsAnimes();
 }
 
 /**
@@ -68,14 +58,14 @@ const fillSongEditModal = async (self) => {
  */
 async function CreateSongLine(table, song) {
     let row = table.insertRow(-1);
-    row.id = "song-" + song.name;
+    row.id = "song-" + song.title;
 
     let cellId = row.insertCell(0);
     cellId.append(song.id);
     cellId.disabled = true;
 
     let cellName = row.insertCell(1);
-    cellName.append(song.name);
+    cellName.append(song.title);
 
     let cellRelation = row.insertCell(2);
     cellRelation.append(song.relation);
@@ -119,38 +109,17 @@ function insererLiensLigne(song, cellLiens) {
     cellLiens.appendChild(lienSpotify);
 }
 
-async function creerOptionsAnimes(song, type) {
+async function creerOptionsAnimes() {
     let animes = await getAnimes();
-    let select = document.getElementById("song-"+ type +"-animes");
+    let select = document.getElementById("song-post-animes");
     select.innerHTML=""; //clear le select si les options ont deja ete ajoutes avant
 
-    //s'il s'agit de la modification afficher l'anime de la chanson
-    if (type === "put") {
-        let anime_of_song = await getAnime(song.anime_id);
-        //ajout de l'option de l'anime courant
-        let optDefaut = document.createElement('option');
-        optDefaut.value = anime_of_song.id;
-        optDefaut.innerHTML = anime_of_song.name;
-        select.appendChild(optDefaut);
-        
-        for (const anime of animes) {
-            //pour ne pas ajouter en double
-            if (anime.name != anime_of_song.name){
-                let opt = document.createElement('option');
-                opt.value = anime.id;
-                opt.innerHTML = anime.name;
-                select.appendChild(opt);
-            }
-        }
-    }
-    else{
-        //creation des options des animes
-        for (const anime of animes) {
-            let opt = document.createElement('option');
-                opt.value = anime.id;
-                opt.innerHTML = anime.name;
-                select.appendChild(opt);
-        }
+    //creation des options des animes
+    for (const anime of animes) {
+        let opt = document.createElement('option');
+            opt.value = anime.id;
+            opt.innerHTML = anime.name;
+            select.appendChild(opt);
     }
 }
 
