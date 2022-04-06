@@ -218,17 +218,18 @@ const putSong = async (song) => {
     })
 }
 
-/*const SendEditedSong = async () => {
+const SendEditedSong = async () => {
     // Récupère les information du formulaire
     let id = document.getElementById("song-id").innerText;
-    let name = document.getElementById("name").value;
-    let text = document.getElementById("text").value;
-    let img = document.getElementById("anime-img-url").value;
-    let uri = "";
+    let titre = document.getElementById("song-put-name").value;
+    let relation = document.getElementById("song-put-relation").value;
+    let interpreter = document.getElementById("song-put-interpreter").value;
+    let youtube = document.getElementById("song-put-youtube").value;
+    let spotify = document.getElementById("song-put-spotify").value;
 
-    let anime = new Anime(id, name, text, img, uri);
-    await putAnime(anime);
-}*/
+    let song = new Song(id, titre, relation, interpreter, youtube, spotify, null, "");
+    await putSong(song);
+}
 
 /**
  * DELETE une chanson
@@ -282,18 +283,20 @@ const SendDeleteSong = async () => {
     })
 }
 
-/*const SendCreatedSong = async () => {
+const SendCreatedSong = async () => {
     // Récupère les information du formulaire
-    let id = null; //id n'est pas utilisé par l'api
-    let name = document.getElementById("anime-post-name").value;
-    let text = document.getElementById("anime-post-text").value;
-    let img = document.getElementById("anime-post-image").value;
+    let id = null;
+    let titre = document.getElementById("song-post-name").value;
+    let relation = document.getElementById("song-post-relation").value;
+    let interpreter = document.getElementById("song-post-interpreter").value;
+    let youtube = document.getElementById("song-post-youtube").value;
+    let spotify = document.getElementById("song-post-spotify").value;
+    let anime_id = document.getElementById("song-post-animes").value;
     let uri = "";
-
-    let anime = new Anime(id, name, text, img, uri);
-    await postAnime(anime);
+    
+    let song = new Song(id, titre, relation, interpreter, youtube, spotify, anime_id, uri);
+    await postSong(song);
 }
-*/
 
 (async () => {
     console.log('Lancement script : Connexion');
