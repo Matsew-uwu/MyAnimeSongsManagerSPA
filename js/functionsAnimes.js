@@ -199,20 +199,36 @@ const refreshSearch = () => {
 
 const getAnimesPage = (page) => {
     console.log('animes')
-    refreshTableAnimes(15, page, bar.value);
+    try{
+        refreshTableAnimes(15, page, bar.value);
+    } catch(e){
+        refreshTableAnimes(15, page);
+    }
 }
 
 const getSongsPage = (page) => {
     console.log('songs')
     console.log(page)
-    refreshTableSongs(50, page, bar.value);
+    try{
+        refreshTableSongs(50, page, bar.value);
+    } catch(e){
+        refreshTableSongs(50, page);
+    }
 }
 
 const getPaginationPage = (page) => {
     if (document.getElementById('table-content').getAttribute('type') == "animes"){
-        getAnimesPage(page);
+        try{
+            getAnimesPage(page);
+        } catch(e){
+            console.log(e);
+        }
     } else if (document.getElementById('table-content').getAttribute('type') == "songs") {
-        getSongsPage(page);
+        try{
+            getSongsPage(page);
+        } catch(e){
+            console.log(e);
+        }
     }
 }
 
