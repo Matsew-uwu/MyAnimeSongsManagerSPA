@@ -226,10 +226,8 @@ const SendEditedSong = async () => {
     let interpreter = document.getElementById("song-put-interpreter").value;
     let youtube = document.getElementById("song-put-youtube").value;
     let spotify = document.getElementById("song-put-spotify").value;
-    let anime_id = document.getElementById("song-put-animes").value;
-    let uri = "";
 
-    let song = new Song(id, titre, relation, interpreter, youtube, spotify, anime_id, uri);
+    let song = new Song(id, titre, relation, interpreter, youtube, spotify, null, "");
     await putSong(song);
 }
 
