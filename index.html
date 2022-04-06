@@ -52,14 +52,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="container d-flex justify-content-around">
-                        <form id="form-post-anime" class="form-group flex-grow-1 me-4">
+                        <div id="form-post-anime" class="form-group flex-grow-1 me-4">
                             <label for="name">Nom :</label>
                             <input type="text" class="form-control" id="anime-post-name" placeholder="" required>
                             <label for="name">URL de l'image :</label>
                             <input type="text" class="form-control" id="anime-post-url" class="form-control" placeholder="Cover URL" onfocusout="refreshCover(this, 'anime-post-img')">
                             <label for="text">Description</label>
                             <textarea class="form-control" id="anime-post-text" rows="6"></textarea>
-                        </form>
+                        </div>
                         <div class="container-img">
                             <img id="anime-post-img" src="" alt="" style="width: 220px;">                        
                         </div>
@@ -83,13 +83,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="container d-flex justify-content-around">
-                        <form id="form-put-anime" class="form-group flex-grow-1 me-4">
+                        <div id="form-put-anime" class="form-group flex-grow-1 me-4">
                             <p for="id">ID : <span id="anime-id"></span></p>
                             <label for="name">Nom :</label>
                             <input type="text" class="form-control" id="anime-put-name" placeholder="" required>
                             <label for="text">Description</label>
                             <textarea class="form-control" id="anime-put-text" rows="6"></textarea>
-                        </form>
+                        </div>
                         <div class="container-img">
                             <img id="anime-put-img" src="" alt="Anime cover" style="width: 220px;">
                             <input type="text" id="anime-put-url" class="form-control" placeholder="Cover URL" onfocusout="refreshCover(this, 'anime-put-img')">
