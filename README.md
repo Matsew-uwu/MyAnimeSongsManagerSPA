@@ -18,6 +18,11 @@ cd myanimesongsmanagerapi
 open ./index.html
 ```
 
+## Screenshots
+
+![Screenshot 1](https://user-images.githubusercontent.com/85303770/212961668-7937f2ba-5f74-41c6-94d9-1c6b838f6b40.png)
+
+
 ## CRÉDITS
 
 Réalisé par Matthieu RANDRIANTSOA et Stepan TYURIN
